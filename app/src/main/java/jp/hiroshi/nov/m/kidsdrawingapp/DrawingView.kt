@@ -33,7 +33,7 @@ class DrawingView(context: Context, attrs: AttributeSet ) : View(context, attrs)
         mDrawPaint!!.strokeJoin = Paint.Join.ROUND
         mDrawPaint!!.strokeCap = Paint.Cap.ROUND
         mCanvasPaint = Paint(Paint.DITHER_FLAG)
-        //mBrushSize = 20.toFloat() lesson 109
+        //mBrushSize = 20.toFloat() lesson 110
     }
 
 
