@@ -42,7 +42,7 @@ r68    <jp.hiroshi.nov.m.kidsdrawingapp.DrawingView
         app:layout_constraintTop_toBottomOf="@id/fl_drawing_view_container"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ib_brush"
+        app:layout_constraintBottom_toTopOf="@id/ll_action_buttons"
         >
 
 
@@ -143,7 +143,26 @@ r68    <jp.hiroshi.nov.m.kidsdrawingapp.DrawingView
 
 
     </LinearLayout>
-
+<LinearLayout
+    android:id="@+id/ll_action_buttons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    >
+    <!--3:30 -->
+    <ImageButton
+        android:id="@+id/ib_gallery"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:contentDescription="gallery image"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_brush"
+        />
     <ImageButton
         android:id="@+id/ib_brush"
         android:layout_width="50dp"
@@ -152,10 +171,10 @@ r68    <jp.hiroshi.nov.m.kidsdrawingapp.DrawingView
         android:contentDescription="brush image"
         android:scaleType="fitXY"
         android:src="@drawable/ic_brush"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         />
+
+
+</LinearLayout>
 
 
 
