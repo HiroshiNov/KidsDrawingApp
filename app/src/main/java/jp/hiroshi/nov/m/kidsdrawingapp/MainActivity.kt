@@ -1,8 +1,10 @@
 package jp.hiroshi.nov.m.kidsdrawingapp
 
 import android.app.Dialog
+import android.graphics.drawable.RippleDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+
     }
 
     private fun showBrushSizeChooserDialog(){  //lesson 111
@@ -53,7 +57,23 @@ class MainActivity : AppCompatActivity() {
 
         brushDialog.show()
 
-
-
     }
+
+    fun paintClicked(view: View){ //lesson113 View is what clicked color button
+        if (view !== mImageButtonCurrentPaint){
+            val imageButton = view as ImageButton
+
+            val colorTag = imageButton.tag.toString() // define paint color
+            drawing_view.setColor(colorTag)
+            imageButton.setImageDrawable( //change appearance into clicked button
+                ContextCompat.getDrawable(this,R.drawable.pallet_pressed)
+            )
+            mImageButtonCurrentPaint!!.setImageDrawable(
+                ContextCompat.getDrawable(this,R.drawable.pallet_normal)
+            )
+            mImageButtonCurrentPaint = view //CurrentPaint is changed to the clicked imageButton
+
+        }
+    }
+
 }
