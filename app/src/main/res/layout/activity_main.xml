@@ -20,10 +20,9 @@
     >
     <!--4:55 Add scr from lesson resorces-->
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/iv_background"
         android:scaleType="centerCrop"
         android:contentDescription="background image"
-        android:src="@drawable/large"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

@@ -1,12 +1,15 @@
 package jp.hiroshi.nov.m.kidsdrawingapp
 
 import android.Manifest
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.RippleDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -15,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_brush_size.*
+import kotlin.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,14 +42,30 @@ class MainActivity : AppCompatActivity() {
         ib_gallery.setOnClickListener {  //lesson 121
             if(isReadStorageAllowed()){
                 //run our code to get the image from gallery
+                val pickPhotoIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI) // lesson 122
+                startActivityForResult(pickPhotoIntent, GALLERY)
+
             }else{
                 requestStoragePermission()
             }
         }
 
+    }
 
-
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) { // lesson 122
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == GALLERY){
+                try{
+                    if(data!!.data != null){
+                        iv_background.visibility = View.VISIBLE
+                        iv_background.setImageURI(data.data) //link on your image
+                    }
+                }catch(e: Exception){
+                    Toast.makeText(this, "Error in parsing the image or its corrupted.",Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun showBrushSizeChooserDialog(){  //lesson 111
@@ -124,5 +144,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object{  //lesson 121
         private const val STORAGE_PERMISSINO_CODE = 1
+        private const val GALLERY = 2
     }
 }
