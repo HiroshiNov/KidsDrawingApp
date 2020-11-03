@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.RippleDrawable
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -21,6 +22,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_brush_size.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import kotlin.Exception
 
 class MainActivity : AppCompatActivity() {
@@ -55,6 +59,14 @@ class MainActivity : AppCompatActivity() {
 
         ib_undo.setOnClickListener{ //lesson 123
             drawing_view.onClickUndo()
+        }
+
+        ib_save.setOnClickListener { //lesson126
+            if(isReadStorageAllowed()){
+                BitmapAsyncTask(getBitmapFromView(fl_drawing_view_container)).execute() // getBitmapFromView() converts view into bitmap
+            }else{
+                requestStoragePermission()
+            }
         }
 
 
@@ -163,6 +175,46 @@ class MainActivity : AppCompatActivity() {
         view.draw(canvas)
 
         return returnedBitmap
+    }
+
+    private inner class BitmapAsyncTask(val mBitmap: Bitmap): AsyncTask<Any, Void, String>(){
+
+
+        override fun doInBackground(vararg p0: Any?): String {
+
+            var result = ""
+
+            if(mBitmap != null){
+                try{
+
+                    val bytes = ByteArrayOutputStream()
+                    mBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+                    val f = File(externalCacheDir!!.absoluteFile.toString()
+                            + File.separator + "KidDrawingApp"
+                            + System.currentTimeMillis() / 1000 + ".png")
+
+                    val fos = FileOutputStream(f)
+                    fos.write(bytes.toByteArray())
+                    fos.close()
+                    result = f.absolutePath
+
+                }catch (e: Exception){
+                    result = ""
+                    e.printStackTrace()
+                }
+            }
+        return result
+        }
+
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            if(!result!!.isEmpty()){
+                Toast.makeText(this@MainActivity, "File saved successfully :$result", Toast.LENGTH_LONG).show()
+            }else{
+                Toast.makeText(this@MainActivity, "Somethins went wrong while saving the file", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     companion object{  //lesson 121
