@@ -20,13 +20,13 @@ class DrawingView(context: Context, attrs: AttributeSet ) : View(context, attrs)
     private var color = Color.BLACK
     private var canvas: Canvas? = null
     private val mPaths = ArrayList<CustomPath>()
-    private val mUndoPaths = ArrayList<CustomPath>()
+    private val mUndoPaths = ArrayList<CustomPath>() // lesson123
 
     init{
         setUpDrawing()
     }
 
-    fun onClickUndo(){
+    fun onClickUndo(){ // lesson123
         if(mPaths.size > 0){
             mUndoPaths.add(mPaths.removeAt(mPaths.size -1)) // last Path address is size of array - 1. removeAt function return old value
             invalidate() // call onDraw() again
