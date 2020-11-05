@@ -154,22 +154,22 @@ r68    <jp.hiroshi.nov.m.kidsdrawingapp.DrawingView
     >
     <!--3:30 -->
     <ImageButton
-        android:id="@+id/ib_undo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:contentDescription="gallery image"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_brush"
-        />
-    <ImageButton
         android:id="@+id/ib_gallery"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:contentDescription="gallery image"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_brush"
+        android:src="@drawable/ic_gallery"
+        />
+    <ImageButton
+        android:id="@+id/ib_undo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:contentDescription="undo image"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_undo"
         />
     <ImageButton
         android:id="@+id/ib_brush"
@@ -186,9 +186,9 @@ r68    <jp.hiroshi.nov.m.kidsdrawingapp.DrawingView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:contentDescription="brush image"
+        android:contentDescription="save image"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_brush"
+        android:src="@drawable/ic_save"
         />
 
 
